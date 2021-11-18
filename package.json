@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start:dev": "NODE_ENV=dev npx nodemon ./src/server.js"
+    "test": "NODE_ENV=dev npx nodemon ./src/server.js",
+    "start": "node ./src/server.js"
   },
   "type": "module",
   "dependencies": {
