@@ -26,9 +26,13 @@ const getBuyInfo = async (req, res) => {
 
     const products = await connection.query(`
       SELECT
-        product_id
+        products.product_name
       FROM
+        products
+      JOIN
         user_products
+      ON
+        user_products.product_id = products.id
       WHERE
         user_id = $1;
     `, [userId.rows[0].user_id]);
@@ -36,7 +40,7 @@ const getBuyInfo = async (req, res) => {
     planInfo.delivery_date = plan.rows[0].delivery_date;
     planInfo.sign_date = plan.rows[0].sign_date;
     planInfo.type = plan.rows[0].type;
-    planInfo.producs = products.rows;
+    planInfo.products = products.rows;
 
     res.send(planInfo).status(200);
   } catch (error) {
