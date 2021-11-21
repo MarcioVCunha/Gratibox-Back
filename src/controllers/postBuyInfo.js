@@ -1,4 +1,5 @@
 import connection from '../database/database.js';
+import dayjs from 'dayjs';
 
 const postBuyInfo = async (req, res) => {
   const token = req.headers.authorization.replace('Bearer ', '');
@@ -17,7 +18,7 @@ const postBuyInfo = async (req, res) => {
       SELECT
         *
       FROM
-        user_product
+        user_products
       WHERE
         user_id = $1;    
     `, [userId.rows[0].user_id]);
@@ -97,10 +98,10 @@ const postBuyInfo = async (req, res) => {
 
     await connection.query(`
       INSERT INTO
-        plan (user_id, type, delivery_date)
+        plan (user_id, type, delivery_date, sign_date)
       VALUES
-        ($1, $2, $3);
-    `, [userId.rows[0].user_id, req.body.product.plan, req.body.delivery.date]);
+        ($1, $2, $3, $4);
+    `, [userId.rows[0].user_id, req.body.product.plan, req.body.delivery.date, dayjs().format('DD/MM/YY')]);
 
     let userState = await connection.query(`
       SELECT
