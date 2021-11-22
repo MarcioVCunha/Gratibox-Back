@@ -10,11 +10,12 @@ const {
   DB_PORT,
   DB_HOST,
   DB_NAME,
+  DATABASE_URL
 } = process.env;
 
 const databaseConfig = (NODE_ENV === 'production')
   ? {
-    connectionString: process.env.DATABASE_URL,
+    connectionString: DATABASE_URL,
     ssl: {
       rejectUnautorized: false,
     },

@@ -45,7 +45,7 @@ const getBuyInfo = async (req, res) => {
     res.send(planInfo).status(200);
   } catch (error) {
     res.sendStatus(500);
-    console.log(500);
+    console.log(error);
     return;
   }
 };

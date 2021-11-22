@@ -28,7 +28,7 @@ const signUp = async (req, res) => {
       return;
     }
 
-    res.send(409);
+    res.sendStatus(409);
     return;
   } catch (error) {
     console.log(error);
